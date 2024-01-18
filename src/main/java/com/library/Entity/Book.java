@@ -9,7 +9,8 @@ import lombok.Data;
 public class Book
 {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "Book_id")
     private int ID;
 
     @Column(name = "title")
@@ -22,7 +23,7 @@ public class Book
     @Column(name = "publication_year")
     private int publication_year;
 
-    @Column(name = "isbn")
+    @Column(name = "isbn", unique = true)
     private String isbn;
 
     @ManyToOne

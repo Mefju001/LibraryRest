@@ -9,6 +9,7 @@ import lombok.Data;
 public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Publisher_id")
     private int publisherId;
 
     @Column(name = "publisher_name")

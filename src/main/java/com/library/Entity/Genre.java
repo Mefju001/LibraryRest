@@ -9,6 +9,7 @@ import lombok.Data;
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Genre_id")
     private int genreId;
 
     @Column(name = "genre_name")
