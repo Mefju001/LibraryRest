@@ -8,7 +8,7 @@ import lombok.Data;
 @Table(name = "publishers")
 public class Publisher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Publisher_id")
     private int publisherId;
 

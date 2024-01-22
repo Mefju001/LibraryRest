@@ -8,11 +8,15 @@ import lombok.Data;
 @Table(name = "authors")
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Author_id")
     private int authorId;
 
-    @Column(name = "author_name")
-    private String authorName;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
 
 }
