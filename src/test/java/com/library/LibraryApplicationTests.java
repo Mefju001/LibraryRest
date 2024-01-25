@@ -43,8 +43,16 @@ class LibraryApplicationTests {
     {
         List<Book> books = bookService.ListBooksOfGenre("Fantasy");
         System.out.println(books.toString());
+        System.out.println(books.size());
         assertFalse(books.isEmpty());
     }
-
+    @Test
+    void findbypricebookService()
+    {
+        List<Book> books = bookService.ListBooksForPrice(20F, 40F);
+        System.out.println(books.size());
+        System.out.println(books.toString());
+        assertFalse(books.isEmpty());
+    }
 
 }

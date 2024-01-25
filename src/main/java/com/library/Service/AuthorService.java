@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Lazy
 public class AuthorService {
     private final AuthorRepository authorRepository ;
 

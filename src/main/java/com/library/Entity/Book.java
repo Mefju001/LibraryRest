@@ -25,7 +25,7 @@ public class Book
     private Author author;  // Klucz obcy odnoszący się do encji Author
 
     @Column(name = "publication_year")
-    private int publication_year;
+    private int publicationYear;
 
     @Column(name = "isbn", unique = true)
     private String isbn;
