@@ -1,0 +1,28 @@
+GET http://localhost:8080/Books/Author/George+Martin
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-22T140658.200.json
+
+###
+
+PUT http://localhost:8080/Books/UpdateBook
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-20T144109.400.json
+
+###
+
+GET http://localhost:8080/AuthorBooks/StephenKing
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-19T195226.200.json
+
+###
+

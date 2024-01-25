@@ -996,7 +996,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </collation>
     <schema id="288" parent="1" name="db">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-01-18.19:04:36</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-01-25.19:11:50</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
@@ -1005,206 +1005,276 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <schema id="290" parent="1" name="inz">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="291" parent="1" name="kino">
+    <schema id="291" parent="1" name="mysql">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="292" parent="1" name="mysql">
+    <schema id="292" parent="1" name="performance_schema">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="293" parent="1" name="performance_schema">
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <schema id="294" parent="1" name="sakila">
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <schema id="295" parent="1" name="sys">
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <schema id="296" parent="1" name="world">
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <user id="297" parent="1" name="mysql.infoschema">
+    <user id="293" parent="1" name="mysql.infoschema">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="298" parent="1" name="mysql.session">
+    <user id="294" parent="1" name="mysql.session">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="299" parent="1" name="mysql.sys">
+    <user id="295" parent="1" name="mysql.sys">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="300" parent="1" name="root">
+    <user id="296" parent="1" name="root">
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="301" parent="288" name="authors">
+    <table id="297" parent="288" name="authors">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="302" parent="288" name="books">
+    <table id="298" parent="288" name="booklibrary">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="303" parent="288" name="genres">
+    <table id="299" parent="288" name="books">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="304" parent="288" name="publishers">
+    <table id="300" parent="288" name="genres">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="305" parent="301" name="author_id">
-      <AutoIncrement>1</AutoIncrement>
+    <table id="301" parent="288" name="library">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="302" parent="288" name="publishers">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="303" parent="297" name="author_id">
+      <AutoIncrement>9</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="306" parent="301" name="author_name">
+    <column id="304" parent="297" name="Name">
       <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="307" parent="301" name="PRIMARY">
+    <column id="305" parent="297" name="Surname">
+      <DasType>varchar(100)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <index id="306" parent="297" name="PRIMARY">
       <ColNames>author_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="308" parent="301" name="PRIMARY">
+    <key id="307" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="309" parent="302" name="book_id">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="308" parent="298" name="id">
+      <AutoIncrement>10</AutoIncrement>
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="309" parent="298" name="book_id">
+      <DasType>int|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="310" parent="298" name="library_id">
+      <DasType>int|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="311" parent="298" name="booklibrary_ibfk_1">
+      <ColNames>book_id</ColNames>
+      <RefColNames>book_id</RefColNames>
+      <RefTableName>books</RefTableName>
+    </foreign-key>
+    <foreign-key id="312" parent="298" name="booklibrary_ibfk_2">
+      <ColNames>library_id</ColNames>
+      <RefColNames>Library_id</RefColNames>
+      <RefTableName>library</RefTableName>
+    </foreign-key>
+    <index id="313" parent="298" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="314" parent="298" name="booklibrary_ibfk_1">
+      <ColNames>book_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="315" parent="298" name="booklibrary_ibfk_2">
+      <ColNames>library_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="316" parent="298" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="317" parent="299" name="book_id">
+      <AutoIncrement>14</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="310" parent="302" name="title">
+    <column id="318" parent="299" name="title">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="311" parent="302" name="author_id">
+    <column id="319" parent="299" name="author_id">
       <DasType>int|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="312" parent="302" name="publication_year">
+    <column id="320" parent="299" name="publication_year">
       <DasType>int|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="313" parent="302" name="isbn">
+    <column id="321" parent="299" name="isbn">
       <DasType>varchar(20)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="314" parent="302" name="genre_id">
+    <column id="322" parent="299" name="genre_id">
       <DasType>int|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="315" parent="302" name="language">
+    <column id="323" parent="299" name="language">
       <DasType>varchar(50)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="316" parent="302" name="publisher_id">
+    <column id="324" parent="299" name="publisher_id">
       <DasType>int|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="317" parent="302" name="pages">
+    <column id="325" parent="299" name="pages">
       <DasType>int|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="318" parent="302" name="price">
-      <DasType>decimal(10,2 digit)|0s</DasType>
+    <column id="326" parent="299" name="price">
+      <DasType>float|0s</DasType>
       <Position>10</Position>
     </column>
-    <foreign-key id="319" parent="302" name="books_ibfk_1">
+    <foreign-key id="327" parent="299" name="books_ibfk_1">
       <ColNames>author_id</ColNames>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>author_id</RefColNames>
       <RefTableName>authors</RefTableName>
     </foreign-key>
-    <foreign-key id="320" parent="302" name="books_ibfk_3">
+    <foreign-key id="328" parent="299" name="books_ibfk_3">
       <ColNames>genre_id</ColNames>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>genre_id</RefColNames>
       <RefTableName>genres</RefTableName>
     </foreign-key>
-    <foreign-key id="321" parent="302" name="books_ibfk_2">
+    <foreign-key id="329" parent="299" name="books_ibfk_2">
       <ColNames>publisher_id</ColNames>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>publisher_id</RefColNames>
       <RefTableName>publishers</RefTableName>
     </foreign-key>
-    <index id="322" parent="302" name="PRIMARY">
+    <index id="330" parent="299" name="PRIMARY">
       <ColNames>book_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="323" parent="302" name="isbn">
+    <index id="331" parent="299" name="isbn">
       <ColNames>isbn</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="324" parent="302" name="author_id">
+    <index id="332" parent="299" name="books_ibfk_1">
       <ColNames>author_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="325" parent="302" name="genre_id">
+    <index id="333" parent="299" name="books_ibfk_3">
       <ColNames>genre_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="326" parent="302" name="publisher_id">
+    <index id="334" parent="299" name="books_ibfk_2">
       <ColNames>publisher_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="327" parent="302" name="PRIMARY">
+    <key id="335" parent="299" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="328" parent="302" name="isbn">
+    <key id="336" parent="299" name="isbn">
       <UnderlyingIndexName>isbn</UnderlyingIndexName>
     </key>
-    <column id="329" parent="303" name="genre_id">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="337" parent="300" name="genre_id">
+      <AutoIncrement>8</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="330" parent="303" name="genre_name">
+    <column id="338" parent="300" name="genre_name">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="331" parent="303" name="PRIMARY">
+    <index id="339" parent="300" name="PRIMARY">
       <ColNames>genre_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="332" parent="303" name="PRIMARY">
+    <key id="340" parent="300" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="333" parent="304" name="publisher_id">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="341" parent="301" name="Library_id">
+      <AutoIncrement>4</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="334" parent="304" name="publisher_name">
+    <column id="342" parent="301" name="Library_name">
+      <DasType>varchar(45)|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="343" parent="301" name="Library_address">
+      <DasType>varchar(45)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <index id="344" parent="301" name="PRIMARY">
+      <ColNames>Library_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="345" parent="301" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="346" parent="302" name="publisher_id">
+      <AutoIncrement>17</AutoIncrement>
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="347" parent="302" name="publisher_name">
       <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="335" parent="304" name="PRIMARY">
+    <index id="348" parent="302" name="PRIMARY">
       <ColNames>publisher_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="336" parent="304" name="PRIMARY">
+    <key id="349" parent="302" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
