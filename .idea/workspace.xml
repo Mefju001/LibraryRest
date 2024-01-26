@@ -44,6 +44,7 @@
     "HTTP Request.generated-requests | #2.executor": "Run",
     "HTTP Request.generated-requests | #3.executor": "Run",
     "HTTP Request.generated-requests | #4.executor": "Run",
+    "HTTP Request.generated-requests | #5.executor": "Run",
     "JUnit.LibraryApplicationTests.FindBy.executor": "Run",
     "JUnit.LibraryApplicationTests.findByGenreBookService.executor": "Run",
     "JUnit.LibraryApplicationTests.findbyauthor.executor": "Run",
@@ -140,6 +141,7 @@
       <workItem from="1706116620342" duration="1199000" />
       <workItem from="1706199351152" duration="8959000" />
       <workItem from="1706215786323" duration="4273000" />
+      <workItem from="1706266922958" duration="7692000" />
     </task>
     <servers />
   </component>
@@ -154,9 +156,24 @@
           <option name="timeStamp" value="4" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/library/Controller/LibraryController.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Security/Security.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="6" />
+          <line>45</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/library/Controller/LibraryController.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookLibraryService.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

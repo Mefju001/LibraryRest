@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/Books")
 public class BooksController {
     private final BookService bookService;
     private final BookLibraryService bookLibraryService;
@@ -30,32 +31,32 @@ public class BooksController {
     }
 
 
-    @GetMapping("/Books")
+    @GetMapping("")
     public List<Book> ListOfBooks()
     {
         return bookService.ListOfBooks();
     }
-    @GetMapping("/Books/Library")
+    @GetMapping("/Library")
     public List<BookLibrary> ListOfBooksInLibrary()
     {
         return bookLibraryService.ListOfBooksInLibrary();
     }
-    @GetMapping("/Books/Library/{id}")
+    @GetMapping("/Library/{id}")
     public List<BookLibrary> ListOfBooksInLibraryByID(@PathVariable int id)
     {
         return bookLibraryService.ListOfBooksInLibraryByID(id);
     }
-    @GetMapping("/Books/Library/Book/{id}")
+    @GetMapping("/Library/Book/{id}")
     public List<BookLibrary> ListOfBooksInLibraryByBook(@PathVariable int id)
     {
         return bookLibraryService.ListOfBooksInLibraryByBook(id);
     }
-    @GetMapping("/Books/{id}")
+    @GetMapping("/{id}")
     public Optional<Book> FindSingleBook(@PathVariable int id)
     {
         return bookService.FindByID(id);
     }
-    @GetMapping("/Books/Sortby/{Sort}/{Type}")
+    @GetMapping("/Sortby/{Sort}/{Type}")
     public List<Book>Sortbook(@PathVariable String Sort, @PathVariable String Type)
     {
         if(Objects.equals(Sort, "Price"))
@@ -73,7 +74,7 @@ public class BooksController {
         }
         return Collections.emptyList();
     }
-    @GetMapping("/Books/Author")
+    @GetMapping("/Author")
     public List<Book> listBooksOfAuthorNameAndSurname(@RequestParam String nameAndSurname){
         String[] parts = nameAndSurname.split("\\s+"); // "\\s+" oznacza dowolny biały znak (np. spacja)
         if (parts.length >= 2) {
@@ -95,7 +96,7 @@ public class BooksController {
             return Collections.emptyList();
         }
     }
-    @GetMapping("/Books/SearchBy")
+    @GetMapping("/SearchBy")
     public List<Book> listBooksOfGenre(@RequestParam String Searchname){
         if(bookService.ListBooksOfGenre(Searchname).isEmpty()) {
             if (bookService.ListBooksOfPublisher(Searchname).isEmpty())
@@ -111,7 +112,7 @@ public class BooksController {
         }
         return bookService.ListBooksOfGenre(Searchname);
     }
-    @GetMapping("/Books/Price")
+    @GetMapping("/Price")
     public List<Book> listBooksOfPrice(@RequestParam(name = "number1") int number1,
                                            @RequestParam(name = "number2") int number2){
         try {
@@ -122,7 +123,7 @@ public class BooksController {
             return Collections.emptyList();
         }
     }
-    @GetMapping("/Books/Year")
+    @GetMapping("/Year")
     public List<Book> listBooksOfYear(@RequestParam(name = "number1") int Year1,
                                            @RequestParam(name = "number2") int Year2){
         try {
@@ -138,7 +139,7 @@ public class BooksController {
 
     /////
 
-    @PostMapping("/Books/AddBook")
+    @PostMapping("/AddBook")
     public ResponseEntity<String> AddBook(@RequestBody Book book) {
         try {
             // Sprawdź, czy gatunek istnieje
@@ -177,12 +178,12 @@ public class BooksController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Wystąpił błąd podczas dodawania książki.");
         }
     }
-    @PutMapping("/Books/UpdateBook")
+    @PutMapping("/UpdateBook")
     public Book UpdateBook(@RequestBody Book book)
     {
         return bookService.save(book);
     }
-    @DeleteMapping("/Books/Delete/{id}")
+    @DeleteMapping("/Delete/{id}")
     public void DeleteBook(@PathVariable int id)
     {
         bookService.Delete(id);

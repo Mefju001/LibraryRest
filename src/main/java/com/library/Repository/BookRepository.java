@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
     List<Book> findBooksByAuthorIs(Author author);
+    Book findBookByIsbnIs(String isbn);
     List<Book> findBooksByGenreIs(Genre genre);
     List<Book> findBooksByPublisherIs(Publisher publisher);
     List<Book> findBooksByTitleIs(String title);
@@ -22,4 +23,5 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     List<Book> findByOrderByPriceDesc();
     List<Book> findByOrderByTitleAsc();
     List<Book> findByOrderByTitleDesc();
+
 }

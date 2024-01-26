@@ -25,4 +25,5 @@ public class BookLibrary {
     @ManyToOne
     @JoinColumn(name = "library_id")
     private Library library;  // Klucz obcy odnoszący się do encji library
+
 }

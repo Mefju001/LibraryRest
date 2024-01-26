@@ -15,25 +15,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class Security {
 
-   /* @Bean
-    public UserDetailsService users() {
-        // The builder will ensure the passwords are encoded before saving in memory
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
-        UserDetails user = users
-                .username("user")
-                .password("{noop}password")
-                .roles("USER")
-                .build();
-        UserDetails admin = users
-                .username("admin")
-                .password("{noop}password")
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }*/
-
-
-
      @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource)
     {
@@ -57,11 +38,20 @@ public class Security {
     {
         http.authorizeHttpRequests(configurer->
                         configurer
-                                .requestMatchers(HttpMethod.GET,"/Books").hasAnyRole("ROOT","USER")
-
-                );
+                                //User
+                                .requestMatchers(HttpMethod.GET,"/Books","/Books/Library","/Books/Library/{id}",
+                                "/Books/Library/Book/{id}","/Books/{id}","/Books/Sortby/{Sort}/{Type}",
+                                "/Books/Author","/Books/SearchBy","/Books/Price","/Library/All","/Books/Year").hasAnyRole("ADMIN","MANAGER","USER")
+                                //Manager&Admin
+                                .requestMatchers(HttpMethod.POST,"/Books/AddBook","/Library/AddLibrary","/Library/AddBookLibrary").hasAnyRole("ADMIN","MANAGER")
+                                .requestMatchers(HttpMethod.PUT,"/Books/UpdateBook","/Library/UpdateLibrary").hasAnyRole("MANAGER","ADMIN")
+                                .requestMatchers(HttpMethod.DELETE,"/Books/Delete/{id}","/Library/{id}").hasAnyRole("MANAGER","ADMIN")
+                                //Admin
+                                //.requestMatchers(HttpMethod.GET,"/Books").hasAnyRole("ADMIN","USER")
+                                .anyRequest().authenticated()
+        );
         http.httpBasic();
-        //http.csrf().disable();
+        http.csrf().disable();
         return http.build();
     }
 
