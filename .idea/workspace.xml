@@ -24,7 +24,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -39,37 +39,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "HTTP Request.generated-requests | #2.executor": "Run",
-    "HTTP Request.generated-requests | #3.executor": "Run",
-    "HTTP Request.generated-requests | #4.executor": "Run",
-    "HTTP Request.generated-requests | #5.executor": "Run",
-    "JUnit.LibraryApplicationTests.FindBy.executor": "Run",
-    "JUnit.LibraryApplicationTests.findByGenreBookService.executor": "Run",
-    "JUnit.LibraryApplicationTests.findbyauthor.executor": "Run",
-    "JUnit.LibraryApplicationTests.findbyname.executor": "Run",
-    "JUnit.LibraryApplicationTests.findbynamebookService.executor": "Run",
-    "JUnit.LibraryApplicationTests.findbypricebookService.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.LibraryApplication.executor": "Run",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projekty/Aplikacja",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;HTTP Request.generated-requests | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #3.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #4.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #5.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.FindBy.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findByGenreBookService.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findbyauthor.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findbyname.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findbynamebookService.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findbypricebookService.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.LibraryApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projekty/Library&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.library.Security" />
@@ -142,6 +142,28 @@
       <workItem from="1706199351152" duration="8959000" />
       <workItem from="1706215786323" duration="4273000" />
       <workItem from="1706266922958" duration="7692000" />
+      <workItem from="1706365279991" duration="7000" />
+      <workItem from="1706651748581" duration="759000" />
+      <workItem from="1706655107949" duration="642000" />
+      <workItem from="1709316807355" duration="26000" />
+      <workItem from="1709838178072" duration="49000" />
+      <workItem from="1710434540313" duration="17000" />
+      <workItem from="1713534859773" duration="7271000" />
+      <workItem from="1714754808841" duration="508000" />
+      <workItem from="1714755392026" duration="1137000" />
+      <workItem from="1714761808741" duration="11000" />
+      <workItem from="1715708150765" duration="7000" />
+      <workItem from="1717107287202" duration="53000" />
+      <workItem from="1717433541855" duration="10000" />
+      <workItem from="1717433940974" duration="19000" />
+      <workItem from="1718187810161" duration="4123000" />
+      <workItem from="1719484950727" duration="18000" />
+      <workItem from="1719485325527" duration="5440000" />
+      <workItem from="1719512654310" duration="58000" />
+      <workItem from="1719686242238" duration="609000" />
+      <workItem from="1720771752415" duration="1379000" />
+      <workItem from="1721121523613" duration="140000" />
+      <workItem from="1721121791442" duration="1008000" />
     </task>
     <servers />
   </component>
@@ -162,7 +184,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Security/Security.java</url>
-          <line>45</line>
+          <line>54</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -172,8 +194,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookLibraryService.java</url>
-          <line>65</line>
+          <line>63</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/FavoriteUserService.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

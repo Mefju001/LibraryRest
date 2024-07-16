@@ -1,6 +1,5 @@
 package com.library.Service;
 
-import com.library.Entity.Book;
 import com.library.Entity.BookLibrary;
 import com.library.Entity.Library;
 import com.library.Repository.*;
@@ -28,7 +27,6 @@ public class BookLibraryService {
         this.bookLibraryRepository = bookLibraryRepository;
         this.libraryRepository = libraryRepository;
     }
-
     public List<Library> ListOfLibrary() {
         return libraryRepository.findAll();
     }

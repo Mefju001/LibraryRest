@@ -44,8 +44,7 @@ public class LibraryController {
         return bookLibraryService.AddLibrary(library);
     }
     @DeleteMapping("/{id}")
-    public void DeleteLibrary(@PathVariable int id)
-    {
+    public void DeleteLibrary(@PathVariable int id) {
         if(bookLibraryService.ListOfBooksInLibraryByID(id).isEmpty())
             bookLibraryService.DeleteLibrary(id);
         else
@@ -53,8 +52,7 @@ public class LibraryController {
             //throw new RuntimeException("Jest przypisany");
     }
     @PostMapping("/AddBookLibrary")
-    public BookLibrary AddBookLibrary(@RequestBody BookLibrary BookLibrary)
-    {
+    public BookLibrary AddBookLibrary(@RequestBody BookLibrary BookLibrary) {
 
         return bookLibraryService.AddBookToLibrary(BookLibrary);
     }

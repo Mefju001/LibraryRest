@@ -23,9 +23,4 @@ public class User {
     @Column(name = "age")
     private int age;
 
-    @Setter
-    @Getter
-    @ManyToOne
-    @JoinColumn(name = "Role_id")
-    private Authority authority;  // Klucz obcy odnoszący się do encji Authority
 }

@@ -1,15 +1,23 @@
 package com.library.Security;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -27,8 +35,8 @@ public class Security {
         // Zapytanie SQL do pobierania ról użytkownika na podstawie nazwy użytkownika
         userDetailsManager.setAuthoritiesByUsernameQuery(
                 "SELECT u.Username, a.authority " +
-                        "FROM users u " +
-                        "JOIN authorities a ON u.Role_id = a.authority_id " +
+                        "FROM userandrole u " +
+                        "JOIN authorities a ON u.authority = a.authority_id " +
                         "WHERE u.Username = ?");
 
         return userDetailsManager;
@@ -36,7 +44,8 @@ public class Security {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
-        http.authorizeHttpRequests(configurer->
+        http
+                .authorizeHttpRequests(configurer->
                         configurer
                                 //User
                                 .requestMatchers(HttpMethod.GET,"/Books","/Books/Library","/Books/Library/{id}",
@@ -50,8 +59,15 @@ public class Security {
                                 //.requestMatchers(HttpMethod.GET,"/Books").hasAnyRole("ADMIN","USER")
                                 .anyRequest().authenticated()
         );
-        http.httpBasic();
-        http.csrf().disable();
+        http.httpBasic(httpBasicCustomizer -> httpBasicCustomizer
+                    .realmName("Logowanie") // Konfiguracja, np. nazwa realm
+                    .authenticationEntryPoint(new CustomAuthenticationEntryPoint()) // Możesz dodać niestandardowy punkt wejścia
+
+                // Możesz dodać inne konfiguracje
+    );
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.exceptionHandling(customizer -> customizer.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+
         return http.build();
     }
 
