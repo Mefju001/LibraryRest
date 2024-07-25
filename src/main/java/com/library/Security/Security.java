@@ -1,23 +1,16 @@
 package com.library.Security;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -50,7 +43,7 @@ public class Security {
                                 //User
                                 .requestMatchers(HttpMethod.GET,"/Books","/Books/Library","/Books/Library/{id}",
                                 "/Books/Library/Book/{id}","/Books/{id}","/Books/Sortby/{Sort}/{Type}",
-                                "/Books/Author","/Books/SearchBy","/Books/Price","/Library/All","/Books/Year").hasAnyRole("ADMIN","MANAGER","USER")
+                                "/Books/Author","/Books/SearchBy","/Books/Price","/Library/All","/Books/Year").permitAll()
                                 //Manager&Admin
                                 .requestMatchers(HttpMethod.POST,"/Books/AddBook","/Library/AddLibrary","/Library/AddBookLibrary").hasAnyRole("ADMIN","MANAGER")
                                 .requestMatchers(HttpMethod.PUT,"/Books/UpdateBook","/Library/UpdateLibrary").hasAnyRole("MANAGER","ADMIN")
@@ -59,14 +52,7 @@ public class Security {
                                 //.requestMatchers(HttpMethod.GET,"/Books").hasAnyRole("ADMIN","USER")
                                 .anyRequest().authenticated()
         );
-        http.httpBasic(httpBasicCustomizer -> httpBasicCustomizer
-                    .realmName("Logowanie") // Konfiguracja, np. nazwa realm
-                    .authenticationEntryPoint(new CustomAuthenticationEntryPoint()) // Możesz dodać niestandardowy punkt wejścia
-
-                // Możesz dodać inne konfiguracje
-    );
         http.csrf(AbstractHttpConfigurer::disable);
-        http.exceptionHandling(customizer -> customizer.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
         return http.build();
     }

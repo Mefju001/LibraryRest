@@ -66,6 +66,9 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -163,7 +166,11 @@
       <workItem from="1719686242238" duration="609000" />
       <workItem from="1720771752415" duration="1379000" />
       <workItem from="1721121523613" duration="140000" />
-      <workItem from="1721121791442" duration="1008000" />
+      <workItem from="1721121791442" duration="3700000" />
+      <workItem from="1721142232994" duration="41000" />
+      <workItem from="1721145558569" duration="2120000" />
+      <workItem from="1721157953239" duration="1643000" />
+      <workItem from="1721253916980" duration="7000" />
     </task>
     <servers />
   </component>
@@ -183,11 +190,6 @@
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/library/Security/Security.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Controller/LibraryController.java</url>
           <line>34</line>
           <option name="timeStamp" value="9" />
@@ -201,6 +203,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/FavoriteUserService.java</url>
           <line>11</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/UserRoleService.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
