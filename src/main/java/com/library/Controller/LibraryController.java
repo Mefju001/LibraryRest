@@ -28,12 +28,12 @@ public class LibraryController {
         this.publisherService = publisherService;
     }
 
-    @GetMapping("/All")
+    @GetMapping("")
     public List<Library> ListOflibrary()
     {
         return bookLibraryService.ListOfLibrary();
     }
-    @PostMapping("/AddLibrary")
+    @PostMapping("")
     public Library AddLibrary(@RequestBody Library library)
     {
         return bookLibraryService.AddLibrary(library);
@@ -45,11 +45,7 @@ public class LibraryController {
     }
     @DeleteMapping("/{id}")
     public void DeleteLibrary(@PathVariable int id) {
-        if(bookLibraryService.ListOfBooksInLibraryByID(id).isEmpty())
-            bookLibraryService.DeleteLibrary(id);
-        else
-            bookLibraryService.DeleteLibraryAndBook(id);
-            //throw new RuntimeException("Jest przypisany");
+        bookLibraryService.DeleteLibrary(id);
     }
     @PostMapping("/AddBookLibrary")
     public BookLibrary AddBookLibrary(@RequestBody BookLibrary BookLibrary) {

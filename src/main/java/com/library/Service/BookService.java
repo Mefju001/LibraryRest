@@ -1,6 +1,9 @@
 package com.library.Service;
 
+import com.library.Entity.Author;
 import com.library.Entity.Book;
+import com.library.Entity.Genre;
+import com.library.Entity.Publisher;
 import com.library.Repository.AuthorRepository;
 import com.library.Repository.BookRepository;
 import com.library.Repository.GenreRepository;
@@ -33,70 +36,101 @@ public class BookService {
     {
         return bookRepository.findAll();
     }
-    public Optional<Book> FindByID(int id)
+    public List<Book> FindByID(int id)
     {
-        return bookRepository.findById(id);
+        return bookRepository.findById(id)
+                .map(Collections::singletonList)
+                .orElse(Collections.emptyList());
     }
-    public List<Book>ListBooksOfAuthorAndSurname(String name,String surname)
+    public List<Book>ListBooksBySort(String sort, String type)
     {
-        return bookRepository.findBooksByAuthorIs(authorRepository.findAuthorsByNameAndSurnameIs(name,surname));
+        if(sort.equalsIgnoreCase("price"))
+        {
+            if(type.equalsIgnoreCase("asc"))
+                return bookRepository.findByOrderByPriceAsc();
+            else if(type.equalsIgnoreCase("desc"))
+                return bookRepository.findByOrderByPriceDesc();
+        } else if (sort.equalsIgnoreCase("title"))
+        {
+            if(type.equalsIgnoreCase("asc"))
+                return bookRepository.findByOrderByTitleAsc();
+            else if(type.equalsIgnoreCase("desc"))
+                return bookRepository.findByOrderByTitleDesc();
+        }
+        return Collections.emptyList();
     }
-    public List<Book>findAuthorsBySurnameIs(String surname)
+    public List<Book>ListBooksOfAuthorAndSurname(String nameAndsurname)
     {
-        return bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsBySurnameIs(surname));
+        String[] parts = nameAndsurname.split("\\s+");
+        if (parts.length >= 2) {
+            String name = parts[0];
+            String surname = parts[1];
+            return bookRepository.findBooksByAuthorIs(authorRepository.findAuthorsByNameAndSurnameIs(name, surname));
+        }else if (parts.length == 1) {
+        String name = parts[0];
+        if(bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsByNameIs(name)).isEmpty()){
+            return bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsBySurnameIs(name));
+        }
+        else{
+            return bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsByNameIs(name));
+        }
+        } else {
+            // Zwróć odpowiedź błędu lub pusta listę, w zależności od wymagań
+            return Collections.emptyList();
+        }
     }
-    public List<Book>ListBooksOfAuthor(String name)
+    public List<Book>ListbooksOfSearchName(String searchname)
     {
-        return bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsByNameIs(name));
-    }
-    public List<Book>ListBooksOfGenre(String genre)
-    {
-        return bookRepository.findBooksByGenreIs(genreRepository.findGenresByGenreNameIs(genre));
-    }
-    public List<Book>ListBooksOfPublisher(String publisher)
-    {
-        return bookRepository.findBooksByPublisherIs(publisherRepository.findPublisherByPublisherNameIs(publisher));
-    }
-    public List<Book>ListBooksForTitle(String title)
-    {
-        return bookRepository.findBooksByTitleIs(title);
+        if(bookRepository.findBooksByGenreIs(genreRepository.findGenresByGenreNameIs(searchname)).isEmpty())
+        {
+         if(bookRepository.findBooksByTitleIs(searchname).isEmpty())
+         {
+             if(bookRepository.findBooksByPublisherIs(publisherRepository.findPublisherByPublisherNameIs(searchname)).isEmpty())
+             {
+                 return Collections.emptyList();
+             }
+             return bookRepository.findBooksByPublisherIs(publisherRepository.findPublisherByPublisherNameIs(searchname));
+         }
+         return bookRepository.findBooksByTitleIs(searchname);
+        }
+        return bookRepository.findBooksByGenreIs(genreRepository.findGenresByGenreNameIs(searchname));
     }
     public List<Book>ListBooksForPrice(Float number1, Float number2)
     {
-        if(number1 > 0 && number2<500&&number1<number2)
+        if(number1 != null && number2 != null && number1 > 0 && number2<500&&number1<number2)
             return bookRepository.findBooksByPriceIsBetween(number1,number2);
         else
             return Collections.emptyList();
-
     }
-    public List<Book>ListBooksForYear(int Year, int Year2)
+    public List<Book>ListBooksForYear(Integer Year, Integer Year2)
     {
         LocalDate date = LocalDate.now();
-        if(Year >1493&& Year2<=date.getYear()&&Year<Year2)
+        if(Year != null && Year2 != null && Year >1493&& Year2<=date.getYear()&&Year<Year2)
             return bookRepository.findBooksByPublicationYearBetween(Year,Year2);
         else
             return Collections.emptyList();
     }
-    public List<Book>ListBooksSortPrice(String type)
-    {
-        if(Objects.equals(type, "Asc"))
-            return bookRepository.findByOrderByPriceAsc();
-        else if(Objects.equals(type, "Desc"))
-            return bookRepository.findByOrderByPriceDesc();
-        else
-            return null;
-    }
-    public List<Book>ListBooksSortTitle(String type)
-    {
-        if(Objects.equals(type, "Asc"))
-            return bookRepository.findByOrderByTitleAsc();
-        else if(Objects.equals(type, "Desc"))
-            return bookRepository.findByOrderByTitleDesc();
-        else
-            return null;
-    }
+
     @Transactional
     public Book save(Book book) {
+        Genre existingGenre = genreRepository.findGenresByGenreNameIs(book.getGenre().getGenreName());
+        Author existingAuthors = authorRepository.findAuthorsByNameAndSurnameIs(book.getAuthor().getName(),book.getAuthor().getSurname());
+        Publisher existingPublisher = publisherRepository.findPublisherByPublisherNameIs(book.getPublisher().getPublisherName());
+        if(existingGenre==null)
+        {
+            existingGenre = genreRepository.save(book.getGenre());
+        }
+        if(existingAuthors==null)
+        {
+            existingAuthors = authorRepository.save(book.getAuthor());
+        }
+        if(existingPublisher==null)
+        {
+            existingPublisher = publisherRepository.save(book.getPublisher());
+        }
+        book.setGenre(existingGenre);
+        book.setAuthor(existingAuthors);
+        book.setPublisher(existingPublisher);
         return bookRepository.save(book);
     }
     @Transactional

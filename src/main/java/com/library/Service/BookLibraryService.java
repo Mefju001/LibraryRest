@@ -43,25 +43,19 @@ public class BookLibraryService {
         return bookLibraryRepository.findByLibrary_ID(id);
     }
 
-    public List<BookLibrary> ListOfBooksInLibraryByBook(int id) {
-        return bookLibraryRepository.findByBook_ID(id);
-    }
-
     @Transactional
     public void DeleteLibrary(int id) {
-        libraryRepository.deleteById(id);
-    }
-
-    @Transactional
-    public void DeleteLibraryAndBook(int id) {
-        List<BookLibrary> booksInLibrary = bookLibraryRepository.findByLibrary_ID(id);
-
-        for (BookLibrary book : booksInLibrary) {
-            bookLibraryRepository.deleteById(book.getID());
+        if(bookLibraryRepository.findByLibrary_ID(id).isEmpty()) {
+            libraryRepository.deleteById(id);
         }
-
-        // Usunięcie samej biblioteki
-        libraryRepository.deleteById(id);
+        else{
+            List<BookLibrary> booksInLibrary = bookLibraryRepository.findByLibrary_ID(id);
+            for (BookLibrary book : booksInLibrary) {
+                bookLibraryRepository.deleteById(book.getID());
+            }
+            // Usunięcie samej biblioteki
+            libraryRepository.deleteById(id);
+            }
     }
 
     @Transactional

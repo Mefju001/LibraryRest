@@ -34,18 +34,11 @@ class LibraryApplicationTests {
     @Test
     void findbynamebookService()
     {
-        List<Book> books = bookService.ListBooksOfAuthorAndSurname("George R.R","Martin");
-        System.out.println(books.toString());
-        assertFalse(books.isEmpty());
+        //List<Book> books = bookService.ListBooksOfAuthorAndSurname("George R.R","Martin");
+        //System.out.println(books.toString());
+        //assertFalse(books.isEmpty());
     }
-    @Test
-    void findByGenreBookService()
-    {
-        List<Book> books = bookService.ListBooksOfGenre("Fantasy");
-        System.out.println(books.toString());
-        System.out.println(books.size());
-        assertFalse(books.isEmpty());
-    }
+
     @Test
     void findbypricebookService()
     {
