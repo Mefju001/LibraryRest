@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LibraryRepository extends JpaRepository<Library,Integer> {
     Library findLibraryByAdresBibliotekiIs(String adres);
+    Library findLibraryByNazwaBibliotekiIs(String nazwa);
 }

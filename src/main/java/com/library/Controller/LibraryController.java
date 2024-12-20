@@ -5,6 +5,8 @@ import com.library.Entity.BookLibrary;
 import com.library.Entity.Library;
 import com.library.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,27 +30,27 @@ public class LibraryController {
         this.publisherService = publisherService;
     }
 
-    @GetMapping("")
-    public List<Library> ListOflibrary()
+    @GetMapping("/")
+    public ResponseEntity<List<Library>> ListOflibrary()
     {
         return bookLibraryService.ListOfLibrary();
     }
-    @PostMapping("")
-    public Library AddLibrary(@RequestBody Library library)
+    @PostMapping("/")
+    public ResponseEntity<Library> AddLibrary(@RequestBody Library library)
     {
         return bookLibraryService.AddLibrary(library);
     }
-    @PutMapping("/UpdateLibrary")
-    public Library UpdateLibrary(@RequestBody Library library)
+    @PutMapping("/")
+    public ResponseEntity<Library> UpdateLibrary(@RequestBody Library library)
     {
         return bookLibraryService.AddLibrary(library);
     }
     @DeleteMapping("/{id}")
-    public void DeleteLibrary(@PathVariable int id) {
-        bookLibraryService.DeleteLibrary(id);
+    public ResponseEntity<HttpStatus> DeleteLibrary(@PathVariable int id) {
+       return bookLibraryService.DeleteLibrary(id);
     }
     @PostMapping("/AddBookLibrary")
-    public BookLibrary AddBookLibrary(@RequestBody BookLibrary BookLibrary) {
+    public ResponseEntity<BookLibrary> AddBookLibrary(@RequestBody BookLibrary BookLibrary) {
 
         return bookLibraryService.AddBookToLibrary(BookLibrary);
     }

@@ -10,13 +10,12 @@ import com.library.Repository.GenreRepository;
 import com.library.Repository.PublisherRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BookService {
@@ -32,54 +31,79 @@ public class BookService {
         this.genreRepository = genreRepository;
         this.publisherRepository = publisherRepository;
     }
-    public List<Book>ListOfBooks()
+    public ResponseEntity<List<Book>> ListOfBooks()
     {
-        return bookRepository.findAll();
+        try{
+            List<Book>books = bookRepository.findAll();
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
-    public List<Book> FindByID(int id)
+    public ResponseEntity<Book> FindByID(int id)
     {
-        return bookRepository.findById(id)
-                .map(Collections::singletonList)
-                .orElse(Collections.emptyList());
+        Optional<Book>book = bookRepository.findById(id);
+        if(book.isPresent())
+        {
+            return new ResponseEntity<>(book.get(), HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
-    public List<Book>ListBooksBySort(String sort, String type)
+    public ResponseEntity<List<Book>>ListBooksBySort(String sort, String type)
     {
+        List<Book>books;
         if(sort.equalsIgnoreCase("price"))
         {
-            if(type.equalsIgnoreCase("asc"))
-                return bookRepository.findByOrderByPriceAsc();
-            else if(type.equalsIgnoreCase("desc"))
-                return bookRepository.findByOrderByPriceDesc();
-        } else if (sort.equalsIgnoreCase("title"))
-        {
-            if(type.equalsIgnoreCase("asc"))
-                return bookRepository.findByOrderByTitleAsc();
-            else if(type.equalsIgnoreCase("desc"))
-                return bookRepository.findByOrderByTitleDesc();
+            if(type.equalsIgnoreCase("asc")){
+                books = bookRepository.findByOrderByPriceAsc();
+                return new ResponseEntity<>(books,HttpStatus.OK);
+            }
+            else if(type.equalsIgnoreCase("desc")) {
+                books = bookRepository.findByOrderByPriceDesc();
+                return new ResponseEntity<>(books,HttpStatus.OK);
+            }
         }
-        return Collections.emptyList();
+        else if (sort.equalsIgnoreCase("title")){
+            if(type.equalsIgnoreCase("asc")){
+                books = bookRepository.findByOrderByTitleAsc();
+                return new ResponseEntity<>(books,HttpStatus.OK);
+            }
+            else if(type.equalsIgnoreCase("desc"))
+            {
+                books = bookRepository.findByOrderByTitleDesc();
+                return new ResponseEntity<>(books,HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
     }
-    public List<Book>ListBooksOfAuthorAndSurname(String nameAndsurname)
+    public ResponseEntity<List<Book>>ListBooksOfAuthorAndSurname(String nameAndsurname)
     {
+        List<Book>books;
         String[] parts = nameAndsurname.split("\\s+");
         if (parts.length >= 2) {
             String name = parts[0];
             String surname = parts[1];
-            return bookRepository.findBooksByAuthorIs(authorRepository.findAuthorsByNameAndSurnameIs(name, surname));
+            books = bookRepository.findBooksByAuthorIs(authorRepository.findAuthorsByNameAndSurnameIs(name, surname));
+            return new ResponseEntity<>(books,HttpStatus.OK);
         }else if (parts.length == 1) {
         String name = parts[0];
         if(bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsByNameIs(name)).isEmpty()){
-            return bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsBySurnameIs(name));
+            books = bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsBySurnameIs(name));
+            return new ResponseEntity<>(books,HttpStatus.OK);
         }
         else{
-            return bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsByNameIs(name));
+            books = bookRepository.findBooksByAuthorIn(authorRepository.findAuthorsByNameIs(name));
+            return new ResponseEntity<>(books,HttpStatus.OK);
         }
         } else {
-            // Zwróć odpowiedź błędu lub pusta listę, w zależności od wymagań
-            return Collections.emptyList();
+
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
         }
     }
-    public List<Book>ListbooksOfSearchName(String searchname)
+    public ResponseEntity<List<Book>>ListbooksOfSearchName(String searchname)
     {
         if(bookRepository.findBooksByGenreIs(genreRepository.findGenresByGenreNameIs(searchname)).isEmpty())
         {
@@ -87,56 +111,64 @@ public class BookService {
          {
              if(bookRepository.findBooksByPublisherIs(publisherRepository.findPublisherByPublisherNameIs(searchname)).isEmpty())
              {
-                 return Collections.emptyList();
+                 return new ResponseEntity<>(Collections.emptyList(),HttpStatus.NO_CONTENT);
              }
-             return bookRepository.findBooksByPublisherIs(publisherRepository.findPublisherByPublisherNameIs(searchname));
+             return new ResponseEntity<>(bookRepository.findBooksByPublisherIs(publisherRepository.findPublisherByPublisherNameIs(searchname)),HttpStatus.OK);
          }
-         return bookRepository.findBooksByTitleIs(searchname);
+         return new ResponseEntity<>(bookRepository.findBooksByTitleIs(searchname),HttpStatus.OK);
         }
-        return bookRepository.findBooksByGenreIs(genreRepository.findGenresByGenreNameIs(searchname));
+        return new ResponseEntity<>(bookRepository.findBooksByGenreIs(genreRepository.findGenresByGenreNameIs(searchname)),HttpStatus.OK);
     }
-    public List<Book>ListBooksForPrice(Float number1, Float number2)
+    public ResponseEntity<List<Book>>ListBooksForPrice(Float number1, Float number2)
     {
         if(number1 != null && number2 != null && number1 > 0 && number2<500&&number1<number2)
-            return bookRepository.findBooksByPriceIsBetween(number1,number2);
+            return new ResponseEntity<>(bookRepository.findBooksByPriceIsBetween(number1,number2),HttpStatus.OK);
         else
-            return Collections.emptyList();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
-    public List<Book>ListBooksForYear(Integer Year, Integer Year2)
+    public ResponseEntity<List<Book>>ListBooksForYear(Integer Year, Integer Year2)
     {
         LocalDate date = LocalDate.now();
         if(Year != null && Year2 != null && Year >1493&& Year2<=date.getYear()&&Year<Year2)
-            return bookRepository.findBooksByPublicationYearBetween(Year,Year2);
+            return new ResponseEntity<>(bookRepository.findBooksByPublicationYearBetween(Year,Year2),HttpStatus.OK);
         else
-            return Collections.emptyList();
+            return new ResponseEntity<>(Collections.emptyList(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Transactional
-    public Book save(Book book) {
-        Genre existingGenre = genreRepository.findGenresByGenreNameIs(book.getGenre().getGenreName());
-        Author existingAuthors = authorRepository.findAuthorsByNameAndSurnameIs(book.getAuthor().getName(),book.getAuthor().getSurname());
-        Publisher existingPublisher = publisherRepository.findPublisherByPublisherNameIs(book.getPublisher().getPublisherName());
-        if(existingGenre==null)
-        {
-            existingGenre = genreRepository.save(book.getGenre());
+    public ResponseEntity<Book> save(Book book) {
+        try {
+            Genre existingGenre = genreRepository.findGenresByGenreNameIs(book.getGenre().getGenreName());
+            Author existingAuthors = authorRepository.findAuthorsByNameAndSurnameIs(book.getAuthor().getName(), book.getAuthor().getSurname());
+            Publisher existingPublisher = publisherRepository.findPublisherByPublisherNameIs(book.getPublisher().getPublisherName());
+            if (existingGenre == null) {
+                existingGenre = genreRepository.save(book.getGenre());
+            }
+            if (existingAuthors == null) {
+                existingAuthors = authorRepository.save(book.getAuthor());
+            }
+            if (existingPublisher == null) {
+                existingPublisher = publisherRepository.save(book.getPublisher());
+            }
+            book.setGenre(existingGenre);
+            book.setAuthor(existingAuthors);
+            book.setPublisher(existingPublisher);
+            return new ResponseEntity<>(bookRepository.save(book),HttpStatus.CREATED);
+        }catch (Exception ignored){
+            return new ResponseEntity<>(null,HttpStatus.CONFLICT);
         }
-        if(existingAuthors==null)
-        {
-            existingAuthors = authorRepository.save(book.getAuthor());
-        }
-        if(existingPublisher==null)
-        {
-            existingPublisher = publisherRepository.save(book.getPublisher());
-        }
-        book.setGenre(existingGenre);
-        book.setAuthor(existingAuthors);
-        book.setPublisher(existingPublisher);
-        return bookRepository.save(book);
     }
     @Transactional
-    public void Delete(int id)
+    public ResponseEntity<HttpStatus> Delete(int id)
     {
-         bookRepository.deleteById(id);
+        Optional<Book>book=bookRepository.findById(id);
+        if(book.isPresent()) {
+            bookRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+
     }
 
 }

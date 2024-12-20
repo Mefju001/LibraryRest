@@ -4,6 +4,11 @@ import com.library.Entity.Book;
 import com.library.Entity.BookLibrary;
 import com.library.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,20 +31,18 @@ public class BooksController {
         this.publisherService = publisherService;
     }
 
-    @GetMapping("")
-    public List<Book> ListOfBooks(@RequestParam(required = false) Integer id,
-                                  @RequestParam(required = false) String nameAndsurname,
-                                  @RequestParam(required = false) String Searchname,
-                                  @RequestParam(required = false,name = "price1") Float price1,
-                                  @RequestParam(required = false,name = "price2") Float price2,
-                                  @RequestParam(required = false,name = "year1") Integer Year1,
-                                  @RequestParam(required = false,name = "year2") Integer Year2)
+    @GetMapping("/")
+    public ResponseEntity<List<Book>> ListOfBooks(@RequestParam(required = false) String nameAndsurname,
+                                                  @RequestParam(required = false) String Searchname,
+                                                  @RequestParam(required = false,name = "price1") Float price1,
+                                                  @RequestParam(required = false,name = "price2") Float price2,
+                                                  @RequestParam(required = false,name = "year1") Integer Year1,
+                                                  @RequestParam(required = false,name = "year2") Integer Year2,
+                                                  @RequestParam(required = false) String sortBy,
+                                                  @RequestParam(required = false) String order)
     {
-        if(id!=null) {
-            return bookService.FindByID(id);
-        }
-        else if (nameAndsurname != null) {
-                return bookService.ListBooksOfAuthorAndSurname(nameAndsurname);
+        if (nameAndsurname != null) {
+            return bookService.ListBooksOfAuthorAndSurname(nameAndsurname);
         }
         else if (Searchname!=null) {
             return bookService.ListbooksOfSearchName(Searchname);
@@ -49,43 +52,32 @@ public class BooksController {
         }
         else if (Year1 != null && Year2 !=null) {
             return bookService.ListBooksForYear(Year1, Year2);
-        }
-        else {
+        } else if (sortBy!=null&&order!=null) {
+            return bookService.ListBooksBySort(sortBy,order);
+        } else {
             return bookService.ListOfBooks();
         }
-
     }
-    @GetMapping("/Library")
-    public List<BookLibrary> ListOfBooksInLibrary(@RequestParam(required = false) Integer id)
+    @GetMapping("/id")
+    public ResponseEntity<Book> ListOfBooks(@RequestParam Integer id)
     {
-        if(id==null) {
-            return bookLibraryService.ListOfBooksInLibrary();
-        }
-        else{
-            return bookLibraryService.ListOfBooksInLibraryByID(id);
-        }
-    }
-    @GetMapping("/Sortowanie")
-    public List<Book>Sortbook(@RequestParam(required = false) String sortBy,
-                              @RequestParam(required = false) String order)
-    {
-        return bookService.ListBooksBySort(sortBy,order);
+        return bookService.FindByID(id);
     }
 
 
-    @PostMapping("")
-    public void AddBook(@RequestBody Book book) {
-        bookService.save(book);
+    @PostMapping("/")
+    public ResponseEntity<Book> AddBook(@RequestBody Book book) {
+        return bookService.save(book);
     }
-    @PutMapping("")
-    public Book UpdateBook(@RequestBody Book book)
+    @PutMapping("/")
+    public ResponseEntity<Book> UpdateBook(@RequestBody Book book)
     {
         return bookService.save(book);
     }
     @DeleteMapping("/{id}")
-    public void DeleteBook(@PathVariable int id)
+    public ResponseEntity<HttpStatus> DeleteBook(@PathVariable(name = "id") Integer id)
     {
-        bookService.Delete(id);
+        return bookService.Delete(id);
     }
 
 }

@@ -1,13 +1,18 @@
 package com.library.Service;
 
+import com.library.Entity.Book;
 import com.library.Entity.BookLibrary;
 import com.library.Entity.Library;
 import com.library.Repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookLibraryService {
@@ -27,39 +32,82 @@ public class BookLibraryService {
         this.bookLibraryRepository = bookLibraryRepository;
         this.libraryRepository = libraryRepository;
     }
-    public List<Library> ListOfLibrary() {
-        return libraryRepository.findAll();
+    public ResponseEntity<List<Library>> ListOfLibrary() {
+        if(libraryRepository.findAll().isEmpty())
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(libraryRepository.findAll(),HttpStatus.OK);
     }
 
-    public Library AddLibrary(Library library) {
-        return libraryRepository.save(library);
-    }
+    public ResponseEntity<Library> AddLibrary(Library library) {
+        try {
+            if (libraryRepository.findLibraryByAdresBibliotekiIs(library.getAdresBiblioteki())!=null||libraryRepository.findLibraryByNazwaBibliotekiIs(library.getNazwaBiblioteki())!=null) {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
 
-    public List<BookLibrary> ListOfBooksInLibrary() {
-        return bookLibraryRepository.findAll();
-    }
+            Library savedLibrary = libraryRepository.save(library);
 
-    public List<BookLibrary> ListOfBooksInLibraryByID(int id) {
-        return bookLibraryRepository.findByLibrary_ID(id);
-    }
+            return new ResponseEntity<>(savedLibrary, HttpStatus.CREATED);
 
-    @Transactional
-    public void DeleteLibrary(int id) {
-        if(bookLibraryRepository.findByLibrary_ID(id).isEmpty()) {
-            libraryRepository.deleteById(id);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        else{
-            List<BookLibrary> booksInLibrary = bookLibraryRepository.findByLibrary_ID(id);
-            for (BookLibrary book : booksInLibrary) {
-                bookLibraryRepository.deleteById(book.getID());
+    }
+
+    public ResponseEntity<List<BookLibrary>> ListOfBooksInLibrary() {
+        try{
+            return new ResponseEntity<>(bookLibraryRepository.findAll(),HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(Collections.emptyList(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<List<BookLibrary>> ListOfBooksInLibraryByID(int id) {
+        try{
+            List<BookLibrary> bookLibrary = bookLibraryRepository.findByLibrary_ID(id);
+            if(bookLibrary.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            // Usunięcie samej biblioteki
-            libraryRepository.deleteById(id);
-            }
+            return new ResponseEntity<>(bookLibrary,HttpStatus.OK);
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Transactional
-    public BookLibrary AddBookToLibrary(BookLibrary bookLibrary) {
-        return bookLibraryRepository.save(bookLibrary);
+    public ResponseEntity<HttpStatus> DeleteLibrary(int id) {
+        try {
+            if(bookLibraryRepository.findByLibrary_ID(id).isEmpty()) {
+                libraryRepository.deleteById(id);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            else{
+                List<BookLibrary> booksInLibrary = bookLibraryRepository.findByLibrary_ID(id);
+                for (BookLibrary book : booksInLibrary) {
+                    bookLibraryRepository.deleteById(book.getID());
+                }
+                // Usunięcie samej biblioteki
+                libraryRepository.deleteById(id);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e)
+        {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Transactional
+    public ResponseEntity<BookLibrary> AddBookToLibrary(BookLibrary bookLibrary) {
+        try {
+            BookLibrary booklibrary = bookLibraryRepository.save(bookLibrary);
+
+            return new ResponseEntity<>(booklibrary, HttpStatus.CREATED);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

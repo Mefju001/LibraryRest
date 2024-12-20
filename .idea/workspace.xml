@@ -39,40 +39,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "HTTP Request.generated-requests | #2.executor": "Run",
-    "HTTP Request.generated-requests | #3.executor": "Run",
-    "HTTP Request.generated-requests | #4.executor": "Run",
-    "HTTP Request.generated-requests | #5.executor": "Run",
-    "JUnit.LibraryApplicationTests.FindBy.executor": "Run",
-    "JUnit.LibraryApplicationTests.findByGenreBookService.executor": "Run",
-    "JUnit.LibraryApplicationTests.findbyauthor.executor": "Run",
-    "JUnit.LibraryApplicationTests.findbyname.executor": "Run",
-    "JUnit.LibraryApplicationTests.findbynamebookService.executor": "Run",
-    "JUnit.LibraryApplicationTests.findbypricebookService.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.LibraryApplication.executor": "Debug",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projekty/Library",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Facets",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;HTTP Request.generated-requests | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #3.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #4.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #5.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #6.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #8.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.FindBy.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findByGenreBookService.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findbyauthor.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findbyname.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findbynamebookService.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LibraryApplicationTests.findbypricebookService.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.LibraryApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projekty/Library&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.library.Security" />
@@ -81,6 +83,12 @@
   </component>
   <component name="RunManager" selected="Spring Boot.LibraryApplication">
     <configuration name="generated-requests | #5" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="5" requestIdentifier="#5" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #6" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="6" requestIdentifier="#6" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #8" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="8" requestIdentifier="#8" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="LibraryApplicationTests.findbypricebookService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -109,6 +117,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.generated-requests | #8" />
+        <item itemvalue="HTTP Request.generated-requests | #6" />
         <item itemvalue="HTTP Request.generated-requests | #5" />
         <item itemvalue="JUnit.LibraryApplicationTests.findbypricebookService" />
       </list>
@@ -183,7 +193,9 @@
       <workItem from="1722593775984" duration="96000" />
       <workItem from="1734628129242" duration="6462000" />
       <workItem from="1734644360535" duration="2408000" />
-      <workItem from="1734691358712" duration="6293000" />
+      <workItem from="1734691358712" duration="12717000" />
+      <workItem from="1734715532816" duration="2754000" />
+      <workItem from="1734721517808" duration="7365000" />
     </task>
     <servers />
   </component>
@@ -198,37 +210,18 @@
           <option name="timeStamp" value="4" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/library/Controller/LibraryController.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/library/Controller/LibraryController.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/FavoriteUserService.java</url>
-          <line>11</line>
+          <line>15</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/UserRoleService.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/library/Controller/BooksController.java</url>
-          <line>68</line>
-          <properties class="com.library.Controller.BooksController" method="Sortbook">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="15" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookLibraryService.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookService.java</url>
-          <line>61</line>
+          <line>81</line>
           <properties class="com.library.Service.BookService" method="ListBooksOfAuthorAndSurname">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -237,7 +230,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookService.java</url>
-          <line>38</line>
+          <line>44</line>
           <properties class="com.library.Service.BookService" method="FindByID">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -246,7 +239,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookService.java</url>
-          <line>81</line>
+          <line>105</line>
           <properties class="com.library.Service.BookService" method="ListbooksOfSearchName">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -255,7 +248,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookService.java</url>
-          <line>97</line>
+          <line>121</line>
           <properties class="com.library.Service.BookService" method="ListBooksForPrice">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -264,7 +257,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookService.java</url>
-          <line>104</line>
+          <line>128</line>
           <properties class="com.library.Service.BookService" method="ListBooksForYear">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -273,7 +266,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookService.java</url>
-          <line>114</line>
+          <line>138</line>
           <properties class="com.library.Service.BookService" method="save">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -281,13 +274,13 @@
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/library/Controller/LibraryController.java</url>
-          <line>50</line>
-          <properties class="com.library.Controller.LibraryController" method="DeleteLibrary">
+          <url>file://$PROJECT_DIR$/src/main/java/com/library/Service/BookService.java</url>
+          <line>161</line>
+          <properties class="com.library.Service.BookService" method="Delete">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
