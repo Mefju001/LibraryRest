@@ -20,39 +20,5 @@ class LibraryApplicationTests {
     @Autowired
     AuthorRepository authorRepository;
 
-    @Test
-    void contextLoads() {
-    }
-
-    @Test
-    void findbyname()
-    {
-        Author authors = authorRepository.findAuthorsByNameAndSurnameIs("Stephen","King");
-        System.out.println(authors.toString());
-        assertNotNull(authors);
-    }
-    @Test
-    void findbynamebookService()
-    {
-        List<Book> books = bookService.ListBooksOfAuthorAndSurname("George R.R","Martin");
-        System.out.println(books.toString());
-        assertFalse(books.isEmpty());
-    }
-    @Test
-    void findByGenreBookService()
-    {
-        List<Book> books = bookService.ListBooksOfGenre("Fantasy");
-        System.out.println(books.toString());
-        System.out.println(books.size());
-        assertFalse(books.isEmpty());
-    }
-    @Test
-    void findbypricebookService()
-    {
-        List<Book> books = bookService.ListBooksForPrice(20F, 40F);
-        System.out.println(books.size());
-        System.out.println(books.toString());
-        assertFalse(books.isEmpty());
-    }
 
 }

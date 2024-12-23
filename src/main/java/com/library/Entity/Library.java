@@ -12,8 +12,8 @@ public class Library {
     @Column(name = "library_id")
     private int ID;
     @Column(name = "library_name")
-    private String nazwa_Biblioteki;
+    private String nazwaBiblioteki;
     @Column(name = "library_address")
-    private String adres_Biblioteki;
+    private String adresBiblioteki;
 
 }

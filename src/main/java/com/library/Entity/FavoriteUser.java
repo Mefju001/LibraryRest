@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
 @Entity
 @Data
-@Table(name = "booklibrary")
-public class BookLibrary {
+@Table(name = "favorite_user")
+public class FavoriteUser {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,13 +16,12 @@ public class BookLibrary {
     @Setter
     @Getter
     @ManyToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "books_id")
     private Book book;  // Klucz obcy odnoszący się do encji Book
 
     @Setter
     @Getter
     @ManyToOne
-    @JoinColumn(name = "library_id")
-    private Library library;  // Klucz obcy odnoszący się do encji library
-
+    @JoinColumn(name = "user_id")
+    private User user;  // Klucz obcy odnoszący się do encji library
 }
