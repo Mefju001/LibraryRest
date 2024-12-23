@@ -1,14 +1,11 @@
 package com.library.Controller;
 
 import com.library.Entity.Book;
-import com.library.Entity.BookLibrary;
 import com.library.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,20 +14,13 @@ import java.util.List;
 @RequestMapping("/Books")
 public class BooksController {
     private final BookService bookService;
-    private final BookLibraryService bookLibraryService;
-    private final GenreService genreService;
-    private final AuthorService authorService;
-    private final PublisherService publisherService;
+    private final Library library;
     @Autowired
-    public BooksController(BookService bookService, BookLibraryService bookLibraryService, GenreService genreService, AuthorService authorService, PublisherService publisherService)
+    public BooksController(BookService bookService, Library library)
     {
         this.bookService = bookService;
-        this.bookLibraryService = bookLibraryService;
-        this.genreService = genreService;
-        this.authorService = authorService;
-        this.publisherService = publisherService;
+        this.library = library;
     }
-
     @GetMapping("/")
     public ResponseEntity<List<Book>> ListOfBooks(@RequestParam(required = false) String nameAndsurname,
                                                   @RequestParam(required = false) String Searchname,
@@ -64,7 +54,7 @@ public class BooksController {
         return bookService.FindByID(id);
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/")
     public ResponseEntity<Book> AddBook(@RequestBody Book book) {
         return bookService.save(book);

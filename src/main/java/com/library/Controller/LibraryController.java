@@ -1,8 +1,6 @@
 package com.library.Controller;
 
-import com.library.Entity.Book;
 import com.library.Entity.BookLibrary;
-import com.library.Entity.Library;
 import com.library.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,43 +13,40 @@ import java.util.List;
 @RequestMapping("/Library")
 public class LibraryController {
     private final BookService bookService;
-    private final BookLibraryService bookLibraryService;
-
-    private final GenreService genreService;
-    private final AuthorService authorService;
-    private final PublisherService publisherService;
+    private final Library library;
     @Autowired
-    public LibraryController(BookService bookService, BookLibraryService bookLibraryService, GenreService genreService, AuthorService authorService, PublisherService publisherService)
+    public LibraryController(BookService bookService, Library library)
     {
         this.bookService = bookService;
-        this.bookLibraryService = bookLibraryService;
-        this.genreService = genreService;
-        this.authorService = authorService;
-        this.publisherService = publisherService;
+        this.library = library;
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Library>> ListOflibrary()
+    public ResponseEntity<List<com.library.Entity.Library>> ListOflibrary()
     {
-        return bookLibraryService.ListOfLibrary();
+        return library.ListOfLibrary();
     }
     @PostMapping("/")
-    public ResponseEntity<Library> AddLibrary(@RequestBody Library library)
+    public ResponseEntity<com.library.Entity.Library> AddLibrary(@RequestBody com.library.Entity.Library library)
     {
-        return bookLibraryService.AddLibrary(library);
+        return this.library.AddLibrary(library);
     }
     @PutMapping("/")
-    public ResponseEntity<Library> UpdateLibrary(@RequestBody Library library)
+    public ResponseEntity<com.library.Entity.Library> UpdateLibrary(@RequestBody com.library.Entity.Library library)
     {
-        return bookLibraryService.AddLibrary(library);
+        return this.library.AddLibrary(library);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> DeleteLibrary(@PathVariable int id) {
-       return bookLibraryService.DeleteLibrary(id);
+       return library.DeleteLibrary(id);
     }
     @PostMapping("/AddBookLibrary")
     public ResponseEntity<BookLibrary> AddBookLibrary(@RequestBody BookLibrary BookLibrary) {
-
-        return bookLibraryService.AddBookToLibrary(BookLibrary);
+        return library.AddBookToLibrary(BookLibrary);
+    }
+    @GetMapping("/BookLibrary")
+    public ResponseEntity<List<BookLibrary>> Listbookinlibrary()
+    {
+        return library.ListOfBooksInLibrary();
     }
 }

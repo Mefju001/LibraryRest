@@ -1,8 +1,6 @@
 package com.library.Service;
 
-import com.library.Entity.Book;
 import com.library.Entity.BookLibrary;
-import com.library.Entity.Library;
 import com.library.Repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class BookLibraryService {
+public class Library {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
     private final GenreRepository genreRepository;
@@ -24,7 +21,7 @@ public class BookLibraryService {
     private final LibraryRepository libraryRepository;
 
     @Autowired
-    public BookLibraryService(BookRepository bookRepository, AuthorRepository authorRepository, GenreRepository genreRepository, PublisherRepository publisherRepository, BookLibraryRepository bookLibraryRepository, LibraryRepository libraryRepository) {
+    public Library(BookRepository bookRepository, AuthorRepository authorRepository, GenreRepository genreRepository, PublisherRepository publisherRepository, BookLibraryRepository bookLibraryRepository, LibraryRepository libraryRepository) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.genreRepository = genreRepository;
@@ -32,20 +29,15 @@ public class BookLibraryService {
         this.bookLibraryRepository = bookLibraryRepository;
         this.libraryRepository = libraryRepository;
     }
-    public ResponseEntity<List<Library>> ListOfLibrary() {
+    public ResponseEntity<List<com.library.Entity.Library>> ListOfLibrary() {
         if(libraryRepository.findAll().isEmpty())
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(libraryRepository.findAll(),HttpStatus.OK);
     }
 
-    public ResponseEntity<Library> AddLibrary(Library library) {
+    public ResponseEntity<com.library.Entity.Library> AddLibrary(com.library.Entity.Library library) {
         try {
-            if (libraryRepository.findLibraryByAdresBibliotekiIs(library.getAdresBiblioteki())!=null||libraryRepository.findLibraryByNazwaBibliotekiIs(library.getNazwaBiblioteki())!=null) {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
-            }
-
-            Library savedLibrary = libraryRepository.save(library);
-
+            com.library.Entity.Library savedLibrary = libraryRepository.save(library);
             return new ResponseEntity<>(savedLibrary, HttpStatus.CREATED);
 
         } catch (Exception e) {
@@ -81,7 +73,7 @@ public class BookLibraryService {
         try {
             if(bookLibraryRepository.findByLibrary_ID(id).isEmpty()) {
                 libraryRepository.deleteById(id);
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
             else{
                 List<BookLibrary> booksInLibrary = bookLibraryRepository.findByLibrary_ID(id);

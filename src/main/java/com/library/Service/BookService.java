@@ -31,6 +31,38 @@ public class BookService {
         this.genreRepository = genreRepository;
         this.publisherRepository = publisherRepository;
     }
+
+    //Genre
+    public Genre findGenresByGenreNameIs(String genreName)
+    {
+        return genreRepository.findGenresByGenreNameIs(genreName);
+    }
+    @Transactional
+    public Genre save(Genre genre)
+    {
+        return genreRepository.save(genre);
+    }
+    //Author
+    public Author findAuthorsByNameAndSurnameIs(String name, String surname)
+    {
+        return authorRepository.findAuthorsByNameAndSurnameIs(name,surname);
+    }
+    @Transactional
+    public Author save(Author author)
+    {
+        return authorRepository.save(author);
+    }
+    //Publisher
+    public Publisher findPublisherByPublisherNameIs(String publisherName) {
+        return publisherRepository.findPublisherByPublisherNameIs(publisherName);
+    }
+
+    @Transactional
+    public Publisher save(Publisher Publisher)
+    {
+        return publisherRepository.save(Publisher);
+    }
+    //Book
     public ResponseEntity<List<Book>> ListOfBooks()
     {
         try{
@@ -154,7 +186,7 @@ public class BookService {
             book.setAuthor(existingAuthors);
             book.setPublisher(existingPublisher);
             return new ResponseEntity<>(bookRepository.save(book),HttpStatus.CREATED);
-        }catch (Exception ignored){
+        }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.CONFLICT);
         }
     }
